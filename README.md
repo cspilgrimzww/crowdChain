@@ -4,7 +4,7 @@ A demo for the project which is the result of cooperation of UCC&amp;ZJU
 
 ##clone  this repository
 
-`git clone git@github.com:cspilgrimzww/crowdChain.git`
+`git clone https://github.com/cspilgrimzww/crowdChain.git`
 
 ##Install dependences
 
