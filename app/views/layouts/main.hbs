@@ -19,6 +19,11 @@
     <!-- Google Fonts-->
     <link href='http://fonts.useso.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
     <link rel="stylesheet" href="/assets/js/Lightweight-Chart/cssCharts.css">
+    <link rel="stylesheet" type="text/css" href="/javascripts/bootstrap-datepicker/css/datepicker-custom.css" />
+    <link rel="stylesheet" type="text/css" href="/javascripts/bootstrap-timepicker/css/timepicker.css" />
+    <link rel="stylesheet" type="text/css" href="/javascripts/bootstrap-daterangepicker/daterangepicker-bs3.css" />
+    <link rel="stylesheet" type="text/css" href="/javascripts/bootstrap-datetimepicker/css/datetimepicker-custom.css" />
+
 </head>
 
 <body>
@@ -31,7 +36,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/"><strong><i class="icon fa fa-plane"></i> CROWDCHAIN</strong></a>
+            <a class="navbar-brand" href="/"><strong><i class="icon fa fa-cogs"></i> CROWDCHAIN</strong></a>
 
             <div id="sideNav" href="">
                 <i class="fa fa-bars icon"></i>
@@ -62,13 +67,19 @@
     <nav class="navbar-default navbar-side" role="navigation">
         <div class="sidebar-collapse">
             <ul class="nav" id="main-menu">
+                <li>
+                    <a class="menu-tag new" href="/newProj"><i class="fa fa-plus"></i> New</a>
+                </li>
 
                 <li>
-                    <a class="active-menu" href="index.html"><i class="fa fa-dashboard"></i> Dashboard</a>
+                    <a class="menu-tag all" href="/"><i class="fa fa-dashboard"></i> All</a>
                 </li>
-                <!--<li>-->
-                    <!--<a href="ui-elements.html"><i class="fa fa-desktop"></i> UI Elements</a>-->
-                <!--</li>-->
+                <li>
+                    <a class="menu-tag founded" href="/founded"><i class="fa fa-flag"></i> Founded</a>
+                </li>
+                <li>
+                    <a class="menu-tag raised" href="/raised"><i class="fa fa-leaf"></i> Raised</a>
+                </li>
 
                 <!--<li>-->
                     <!--<a href="#"><i class="fa fa-sitemap"></i> Charts<span class="fa arrow"></span></a>-->
@@ -132,29 +143,7 @@
     <!-- /. NAV SIDE  -->
 
     <div id="page-wrapper">
-        <div class="header">
-            <h1 class="page-header">
-                Dashboard
-                <!--<small>Welcome John Doe</small>-->
-            </h1>
-            <ol class="breadcrumb">
-                <li><a href="#">Home</a></li>
-                <li class="active">Dashboard</li>
-            </ol>
-
-        </div>
-        <div id="page-inner">
-
-            <!-- /. ROW  -->
-            {{{body}}}
-            <!-- /. ROW  -->
-
-
-            <!--<footer><p>Copyright &copy; 2016.Company name All rights reserved.<a target="_blank" href="http://www.mycodes.net/">&#x7F51;&#x9875;&#x6A21;&#x677F;</a></p>-->
-
-
-            </footer>
-        </div>
+        {{{body}}}
         <!-- /. PAGE INNER  -->
     </div>
     <!-- /. PAGE WRAPPER  -->
@@ -185,7 +174,37 @@
 <!-- Chart Js -->
 <script type="text/javascript" src="/assets/js/chart.min.js"></script>
 <script type="text/javascript" src="/assets/js/chartjs.js"></script>
+<script src="/assets/js/select2.full.min.js"></script>
 
+
+<!--pickers plugins-->
+<script type="text/javascript" src="/javascripts/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<script type="text/javascript" src="/javascripts/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
+<script type="text/javascript" src="/javascripts/bootstrap-daterangepicker/moment.min.js"></script>
+<script type="text/javascript" src="/javascripts/bootstrap-daterangepicker/daterangepicker.js"></script>
+<script type="text/javascript" src="/javascripts/bootstrap-timepicker/js/bootstrap-timepicker.js"></script>
+
+
+<!--pickers initialization-->
+<script src="/javascripts/pickers-init.js"></script>
 </body>
 
 </html>
+
+<script>
+    var setActiveMenu = function (item) {
+        item.addClass('active-menu');
+    };
+    var foo = function () {
+        $(".selectbox").select2();
+//        var tagAs = $('#main-menu').find('a');
+//        alert(document.location.pathname);
+        switch(document.location.pathname){
+            case '/':setActiveMenu($('.menu-tag.all'));break;
+            case '/founded':setActiveMenu($('.menu-tag.founded'));break;
+            case '/raised':setActiveMenu($('.menu-tag.raised'));break;
+            case '/newProj':setActiveMenu($('.menu-tag.new'));break;
+        }
+    };
+    foo();
+</script>

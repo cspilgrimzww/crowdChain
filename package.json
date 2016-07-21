@@ -1,0 +1,35 @@
+{
+  "name": "crowdchain",
+  "version": "1.0.0",
+  "description": "A demo for the project which is the result of cooperation of UCC&amp;ZJU",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cspilgrimzww/crowdChain.git"
+  },
+  "keywords": [
+    "crowdfound"
+  ],
+  "author": "vi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cspilgrimzww/crowdChain/issues"
+  },
+  "homepage": "https://github.com/cspilgrimzww/crowdChain#readme",
+  "dependencies": {
+    "app-module-path": "^1.1.0",
+    "express": "^4.13.4",
+    "express-handlebars": "^3.0.0",
+    "geoip-lite": "^1.1.8",
+    "handlebars": "^4.0.5",
+    "lodash": "^4.13.1",
+    "mongoose": "^4.4.19",
+    "primus": "^5.2.1",
+    "primus-emit": "^1.0.0",
+    "web3": "^0.16.0",
+    "ws": "^1.1.0"
+  }
+}
