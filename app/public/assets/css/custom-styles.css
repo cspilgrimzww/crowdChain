@@ -539,9 +539,12 @@ padding-top: 4px;
 ul.nav.nav-second-level.collapse.in {background: #131212;}
 .sidebar-collapse .nav > li > a:hover,
 .sidebar-collapse .nav > li > a:focus {
-	 outline:0;
-	 background: #575757;
-	 color: #F36A5A;
+	 
+outline:0;
+	 
+background: #575757;
+	 
+color: #F36A5A;
 }
  
 .navbar-side {
@@ -667,3 +670,32 @@ font-size: 19px;
 }
 
 
+
+ul.p-info {
+    list-style-type: none;
+    padding: 0;
+    margin-bottom: 0;
+}
+
+ul.p-info li {
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+ul.p-info li:last-child {
+    margin-bottom: 0;
+}
+
+ul.p-info .title, ul.p-info .desk {
+    float: left;
+}
+
+ul.p-info .title {
+    width: 40%;
+}
+
+ul.p-info .desk {
+    width: 60%;
+    color: #65cea7;
+}

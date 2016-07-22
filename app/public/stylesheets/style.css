@@ -3572,35 +3572,6 @@ ul.p-social-link li a:hover, ul.p-social-link li.active a {
   color: #fff;
 }
 
-ul.p-info {
-  list-style-type: none;
-  padding: 0;
-  margin-bottom: 0;
-}
-
-ul.p-info li {
-  display: inline-block;
-  width: 100%;
-  margin-bottom: 10px;
-}
-
-ul.p-info li:last-child {
-  margin-bottom: 0;
-}
-
-ul.p-info .title, ul.p-info .desk {
-  float: left;
-}
-
-ul.p-info .title {
-  width: 40%;
-}
-
-ul.p-info .desk {
-  width: 60%;
-  color: #65cea7;
-}
-
 
 .p-states h4{
   color: #535351;
