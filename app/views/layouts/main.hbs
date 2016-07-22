@@ -16,6 +16,9 @@
     <link href="/assets/js/morris/morris-0.4.3.min.css" rel="stylesheet" />
     <!-- Custom Styles-->
     <link href="/assets/css/custom-styles.css" rel="stylesheet" />
+    <!-- ADMINEX CSS-->
+    <link href="/assets/css/style.css" rel="stylesheet" />
+    <link href="/assets/css/style-responsive.css" rel="stylesheet" />
     <!-- Google Fonts-->
     <link href='http://fonts.useso.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
     <link rel="stylesheet" href="/assets/js/Lightweight-Chart/cssCharts.css">
@@ -75,10 +78,7 @@
                     <a class="menu-tag all" href="/home"><i class="fa fa-dashboard"></i> All</a>
                 </li>
                 <li>
-                    <a class="menu-tag founded" href="/founded"><i class="fa fa-flag"></i> Founded</a>
-                </li>
-                <li>
-                    <a class="menu-tag raised" href="/raised"><i class="fa fa-leaf"></i> Raised</a>
+                    <a class="menu-tag funded" href="/funded"><i class="fa fa-flag"></i> Funded</a>
                 </li>
 
                 <!--<li>-->
@@ -206,7 +206,7 @@
 //        alert(document.location.pathname);
         switch(document.location.pathname){
             case '/':setActiveMenu($('.menu-tag.all'));break;
-            case '/founded':setActiveMenu($('.menu-tag.founded'));break;
+            case '/funded':setActiveMenu($('.menu-tag.funded'));break;
             case '/raised':setActiveMenu($('.menu-tag.raised'));break;
             case '/newProj':setActiveMenu($('.menu-tag.new'));break;
         }

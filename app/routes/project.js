@@ -21,12 +21,12 @@ router.get('/projDetail', function(req, res, next) {
             title:"ProjDetail"
         });
 });
-router.get('/foundedDetail', function(req, res, next) {
+router.get('/fundedDetail', function(req, res, next) {
     var from = req.params.from;
     console.log(from);
-    res.render('foundedDetail',
+    res.render('fundedDetail',
         {
-            title:"foundedDetail"
+            title:"fundedDetail"
         });
 });
 

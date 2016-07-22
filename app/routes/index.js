@@ -22,8 +22,8 @@ router.get('/raised', function(req, res, next) {
     title: 'Home'
   });
 });
-router.get('/founded', function(req, res, next) {
-  res.render('foundedList', {
+router.get('/funded', function(req, res, next) {
+  res.render('fundedList', {
     title: 'Home'
   });
 });
