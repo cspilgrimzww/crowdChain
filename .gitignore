@@ -38,6 +38,8 @@ jspm_packages
 
 # idea xml
 .idea
+*.iml
+*.xml
 
 # remove .DS_Store
 .DS_Store

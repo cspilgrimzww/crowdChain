@@ -3,8 +3,6 @@
 <div class="header">
     <h1 class="page-header">
         Raise Project
-        <!--Dashboard-->
-        <!--<small>Welcome John Doe</small>-->
     </h1>
     <ol class="breadcrumb">
         <li class="active">New</li>
@@ -16,45 +14,53 @@
             <div class="panel panel-success">
                 <div class="panel-heading">
                     <div class="card-title">
-                        <div class="title">Edit Project (Form1)</div>
+                        <div class="title">Edit Project</div>
                     </div>
                 </div>
                 <div class="panel-body">
                     <form action="#" class="form-horizontal ">
+                        <div class="choose_file">
+                            <span style="color: white">Choose Image</span>
+                            <input type="file" accept="image/*" onchange="loadFile(event)" />
+                        </div><br><br>
+                        <div class="img-control">
+                            <img id="image" width="100%" height="100%" />
+                        </div>
                         <div class="form-group">
                             <div class="form-group">
-                                <label class="control-label col-md-3" style="padding-left: 30px; text-align: left;">Title</label>
-                                <div class="col-md-7 col-xs-11">
+                                <label class="control-label col-md-2" style="padding-left: 30px; text-align: left;">Title</label>
+                                <div class="col-md-9 col-xs-11" style="float: right; padding-right: 30px">
                                     <input type="text" class="form-control" placeholder="Text input">
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="form-group">
-                                <label class="control-label col-md-3" style="padding-left: 30px; text-align: left;">Excepted Budget</label>
-                                <div class="col-md-7 col-xs-11">
+                                <label class="control-label col-md-2" style="padding-left: 30px; text-align: left;">Excepted Budget</label>
+                                <div class="col-md-9 col-xs-11" style="float: right; padding-right: 30px">
                                     <input type="number" class="form-control" placeholder="Text input">
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="form-group">
-                                <label class="control-label col-md-3" style="padding-left: 30px; text-align: left;">DeadLine</label>
-                                <div class="col-md-7 col-xs-11">
+                                <label class="control-label col-md-2" style="padding-left: 30px; text-align: left;">DeadLine</label>
+                                <div class="col-md-9 col-xs-11" style="float: right; padding-right: 30px">
                                     <input class="form-control form-control-inline input-medium default-date-picker"  size="16" type="text" value="" />
                                 </div>
                             </div>
                         </div>
                     </form>
-                    <div class="">
-                        Examples of standard form controls. such as input, textarea, select, checkboxes and radios , static control, etc.
-
-                        <div class="sub-title">Project Description</div>
-                        <div>
-                            <textarea class="form-control" rows="8"></textarea>
-                        </div>
+                    <div class="sub-title">Brief Information</div>
+                    <div>
+                        <textarea class="form-control" rows="3"></textarea>
                     </div>
-                    <div class="panel-footer text-right">
+                    <div class="sub-title">Detailed Description</div>
+                    <div>
+                        <textarea id="mytextarea"></textarea>
+                    </div>
+                    <br>
+                    <div class="panel-footer text-right" style="background-color: inherit">
                         <a class="btn btn-success" href="/raisedDetail">SAVE</a>
                         <a class="btn btn-default" href="/home">CANCEL</a>
                     </div>
@@ -63,3 +69,10 @@
         </div>
     </div>
 </div>
+
+<script>
+    var loadFile = function(event) {
+        var output = document.getElementById('image');
+        output.src = URL.createObjectURL(event.target.files[0]);
+    };
+</script>
