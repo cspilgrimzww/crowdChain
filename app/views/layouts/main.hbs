@@ -20,9 +20,9 @@
     <link href='http://fonts.useso.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
     <link rel="stylesheet" href="/assets/js/Lightweight-Chart/cssCharts.css">
     <link rel="stylesheet" type="text/css" href="/javascripts/bootstrap-datepicker/css/datepicker-custom.css" />
-    <link rel="stylesheet" type="text/css" href="/javascripts/bootstrap-timepicker/css/timepicker.css" />
-    <link rel="stylesheet" type="text/css" href="/javascripts/bootstrap-daterangepicker/daterangepicker-bs3.css" />
-    <link rel="stylesheet" type="text/css" href="/javascripts/bootstrap-datetimepicker/css/datetimepicker-custom.css" />
+    <!--<link rel="stylesheet" type="text/css" href="/javascripts/bootstrap-timepicker/css/timepicker.css" />-->
+    <!--<link rel="stylesheet" type="text/css" href="/javascripts/bootstrap-daterangepicker/daterangepicker-bs3.css" />-->
+    <!--<link rel="stylesheet" type="text/css" href="/javascripts/bootstrap-datetimepicker/css/datetimepicker-custom.css" />-->
 
 </head>
 
@@ -179,14 +179,15 @@
 
 <!--pickers plugins-->
 <script type="text/javascript" src="/javascripts/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
-<script type="text/javascript" src="/javascripts/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
-<script type="text/javascript" src="/javascripts/bootstrap-daterangepicker/moment.min.js"></script>
-<script type="text/javascript" src="/javascripts/bootstrap-daterangepicker/daterangepicker.js"></script>
-<script type="text/javascript" src="/javascripts/bootstrap-timepicker/js/bootstrap-timepicker.js"></script>
+<!--<script type="text/javascript" src="/javascripts/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>-->
+<!--<script type="text/javascript" src="/javascripts/bootstrap-daterangepicker/moment.min.js"></script>-->
+<!--<script type="text/javascript" src="/javascripts/bootstrap-daterangepicker/daterangepicker.js"></script>-->
+<!--<script type="text/javascript" src="/javascripts/bootstrap-timepicker/js/bootstrap-timepicker.js"></script>-->
 
 
 <!--pickers initialization-->
-<script src="/javascripts/pickers-init.js"></script>
+<!--<script src="/javascripts/pickers-init.js"></script>-->
+
 </body>
 
 </html>
@@ -196,6 +197,10 @@
         item.addClass('active-menu');
     };
     var foo = function () {
+
+        $('.default-date-picker').datepicker({
+            format: 'mm-dd-yyyy'
+        });
         $(".selectbox").select2();
 //        var tagAs = $('#main-menu').find('a');
 //        alert(document.location.pathname);
