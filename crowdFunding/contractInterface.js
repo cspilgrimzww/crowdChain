@@ -45,7 +45,7 @@ var crowdFundingSystem = myContract.at(contractAddress);
  * @param callback
  */
 function issue(from,to,amount,callback) {
-    if(from != web3.eth.account[0])
+    if(from != web3.eth.accounts[0])
         return;
     //利用sendTransaction把交易记录到区块链
     crowdFundingSystem.issue.sendTransaction(to,amount,{from: web3.eth.accounts[0]},callback);
