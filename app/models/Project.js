@@ -6,8 +6,8 @@ var mongoose = require('mongoose');
 
 var Schema = mongoose.Schema;
 var _Project = new Schema({
-    title: { type: String, required: true, unique: true },
-    brief: { type: String, required: true, unique: true },
+    title: { type: String, required: true},
+    brief: { type: String, required: true},
     description: { type:String, required: true },
     comments: { type: Array },
     funders: { type: Array },
@@ -20,6 +20,7 @@ var _Project = new Schema({
 
 
 _Project.methods.toJson = function(){
+    var daysLeft=(this.deadline-(new Date()))/(1000*60*60*24).toFixed(0);
     return {
         title: this.title,
         brief: this.brief,
@@ -30,7 +31,9 @@ _Project.methods.toJson = function(){
         description: this.description,
         comments: this.comments,
         funders: this.funders,
-        createTime: this.createTime.toLocaleString()
+        createTime: this.createTime.toLocaleString(),
+        percentage: (this.raisedAmount/this.targetAmount).toFixed(2),
+        daysLeft: daysLeft>0?daysLeft:'expired'
     }
 };
 var Project = mongoose.model('Project', _Project);

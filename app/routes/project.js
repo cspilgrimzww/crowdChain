@@ -8,9 +8,10 @@ var models = require('../models/index')();
 var fs = require('fs');
 var path = require('path');
 var config = require('../config');
+var filter = require('../lib/filter');
 
 /* GET home page. */
-router.get('/raisedDetail', function(req, res, next) {
+router.get('/raisedDetail', filter.authorized_required, function(req, res, next) {
     var from = req.params.from;
     console.log(from);
     res.render('raisedDetail',
@@ -18,7 +19,7 @@ router.get('/raisedDetail', function(req, res, next) {
             title:"raisedDetail"
         });
 });
-router.get('/projDetail', function(req, res, next) {
+router.get('/projDetail', filter.authorized_required, function(req, res, next) {
     var from = req.params.from;
     console.log(from);
     res.render('projDetail',
@@ -26,7 +27,7 @@ router.get('/projDetail', function(req, res, next) {
             title:"ProjDetail"
         });
 });
-router.get('/fundedDetail', function(req, res, next) {
+router.get('/fundedDetail', filter.authorized_required, function(req, res, next) {
     var from = req.params.from;
     console.log(from);
     res.render('fundedDetail',
@@ -35,14 +36,12 @@ router.get('/fundedDetail', function(req, res, next) {
         });
 });
 
-router.post('/project', multipartMiddleware, function(req, res){
-    var data = JSON.stringify(req.body);
-    console.log(data);
-    console.log(req.files.image);
+router.post('/project', filter.admin_required, multipartMiddleware, function(req, res){
+    var data = req.body;
     if (req.files && req.files.image.path != 'undifined') {
         var temp_path = req.files.image.path;
         if (temp_path) {
-            fs.readFile(temp_path, 'utf-8', function (err, content) {
+            fs.readFile(temp_path, function (err, content) {
                 // 删除临时文件
                 var savePath = path.join(__dirname, '../public/images/projects/'+req.files.image.name);
                 fs.writeFile(savePath, content, function (err) {
@@ -50,16 +49,17 @@ router.post('/project', multipartMiddleware, function(req, res){
                         throw err;
                     }
                     else {
+                        console.log("data::::"+data);
                         var new_proj = models.Project({
                             title: data.title,
                             brief: data.brief,
-                            targetAmount: data.targetAmount,
+                            targetAmount: data.budget,
                             description: data.description,
                             deadline: data.deadline,
-                            image:savePath,
+                            image:'/public/images/projects/'+req.files.image.name,
                             createTime: new Date()
                         });
-                        console.log(JSON.stringify(new_proj));
+                        console.log("new_proj::::"+JSON.stringify(new_proj));
                         new_proj.save();
                         res.redirect('/newProj');
                     }

@@ -23,8 +23,8 @@ mongoose.connect('mongodb://localhost/crowdchain');
 
 var app = express();
 
-// demodata();
 // var demodata = require('./help_utils/demoData').demoData;
+// demodata();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
