@@ -55,7 +55,7 @@ function issue(crowdFundingSystem,from,to,amount,callback) {
  * @param to
  * @param amount
  */
-function transfer(crowdFundingSystem, from, to, amount，callback){
+function transfer(crowdFundingSystem, from, to, amount, callback){
     crowdFundingSystem.transfer.sendTransaction(to,amount,{from: from},callback);
 }
 
