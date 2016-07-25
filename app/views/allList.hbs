@@ -23,7 +23,11 @@
                         </div>
                         <p>{{brief}}
                         </p>
-                        <a href="/projDetail/{{id}}" class="more">Continue Reading</a>
+                        {{#if ../session.isAdmin}}
+                            <a href="/raisedDetail/{{id}}" class="more">Continue Reading</a>
+                        {{else}}
+                            <a href="/projDetail/{{id}}" class="more">Continue Reading</a>
+                        {{/if}}
                         <hr>
                         <div class="status">
                             <div class="project-status">

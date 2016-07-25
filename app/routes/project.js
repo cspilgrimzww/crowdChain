@@ -11,13 +11,17 @@ var config = require('../config');
 var filter = require('../lib/filter');
 
 /* GET home page. */
-router.get('/raisedDetail', filter.authorized_required, function(req, res, next) {
-    var from = req.params.from;
-    console.log(from);
-    res.render('raisedDetail',
-        {
-            title:"raisedDetail"
-        });
+router.get('/raisedDetail/:id', filter.authorized_required, function(req, res, next) {
+    var id = req.params.id;
+    models.Project.findOne({_id:id}, function (err,result) {
+        if(err){
+            throw err;
+        }else {
+            return res.render('raisedDetail',{
+                project:result.toJson()
+            })
+        }
+    });
 });
 router.get('/projDetail/:id', filter.authorized_required, function(req, res, next) {
     var id = req.params.id;

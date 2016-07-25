@@ -70,19 +70,9 @@
     </div>
 </div>
 
+<script src='//cdn.tinymce.com/4/tinymce.min.js'></script>
 <script>
-    var img = '';
-    var title = '';
-    var target = 0;
-    var deadLine = new Date();
-    var brief = '';
-    var description = '';
-
-    var loadFile = function(event) {
-        var output = document.getElementById('image');
-        output.src = URL.createObjectURL(event.target.files[0]);
-    };
-
-    $(function(){
-    })
+    tinymce.init({
+        selector: '#mytextarea'
+    });
 </script>

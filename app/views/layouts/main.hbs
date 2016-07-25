@@ -71,16 +71,17 @@
                     <li>
                         <a class="menu-tag new" href="/newProj"><i class="fa fa-plus"></i> New</a>
                     </li>
+                    <li>
+                        <a class="menu-tag all" href="/home"><i class="fa fa-dashboard"></i> All</a>
+                    </li>
+                {{else}}
+                    <li>
+                        <a class="menu-tag all" href="/home"><i class="fa fa-dashboard"></i> All</a>
+                    </li>
+                    <li>
+                        <a class="menu-tag funded" href="/funded"><i class="fa fa-flag"></i> Funded</a>
+                    </li>
                 {{/if}}
-                <li>
-                    <a class="menu-tag all" href="/home"><i class="fa fa-dashboard"></i> All</a>
-                </li>
-                <li>
-                    <a class="menu-tag funded" href="/funded"><i class="fa fa-flag"></i> Funded</a>
-                </li>
-                <li>
-                    <a class="menu-tag raised" href="/raised"><i class="fa fa-flag-checkered"></i> Raised</a>
-                </li>
             </ul>
 
         </div>
