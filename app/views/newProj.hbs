@@ -18,10 +18,10 @@
                     </div>
                 </div>
                 <div class="panel-body">
-                    <form action="#" class="form-horizontal ">
+                    <form action="/project" class="form-horizontal" method="post" enctype="multipart/form-data">
                         <div class="choose_file">
                             <span style="color: white">Choose Image</span>
-                            <input type="file" accept="image/*" onchange="loadFile(event)" />
+                            <input name='image' type="file" accept="image/*" onchange="loadFile(event)" />
                         </div><br><br>
                         <div class="img-control">
                             <img id="image" width="100%" height="100%" />
@@ -30,7 +30,7 @@
                             <div class="form-group">
                                 <label class="control-label col-md-2" style="padding-left: 30px; text-align: left;">Title</label>
                                 <div class="col-md-9 col-xs-11" style="float: right; padding-right: 30px">
-                                    <input type="text" class="form-control" placeholder="Text input">
+                                    <input name='title' type="text" class="form-control" placeholder="Text input">
                                 </div>
                             </div>
                         </div>
@@ -38,7 +38,7 @@
                             <div class="form-group">
                                 <label class="control-label col-md-2" style="padding-left: 30px; text-align: left;">Excepted Budget</label>
                                 <div class="col-md-9 col-xs-11" style="float: right; padding-right: 30px">
-                                    <input type="number" class="form-control" placeholder="Text input">
+                                    <input name="budget" type="number" class="form-control" placeholder="Text input">
                                 </div>
                             </div>
                         </div>
@@ -46,24 +46,24 @@
                             <div class="form-group">
                                 <label class="control-label col-md-2" style="padding-left: 30px; text-align: left;">DeadLine</label>
                                 <div class="col-md-9 col-xs-11" style="float: right; padding-right: 30px">
-                                    <input class="form-control form-control-inline input-medium default-date-picker"  size="16" type="text" value="" />
+                                    <input name="deadline" class="form-control form-control-inline input-medium default-date-picker"  size="16" type="text" value="" />
                                 </div>
                             </div>
+                        </div> <div class="sub-title">Brief Information</div>
+                        <div>
+                            <textarea name="brief" class="form-control" rows="3"></textarea>
+                        </div>
+                        <div class="sub-title">Detailed Description</div>
+                        <div>
+                            <textarea name="description" id="mytextarea"></textarea>
+                        </div>
+                        <br>
+                        <div class="panel-footer text-right" style="background-color: inherit">
+                            <input type="submit" class="btn btn-success" >
+                            <a class="btn btn-default" href="/home">CANCEL</a>
                         </div>
                     </form>
-                    <div class="sub-title">Brief Information</div>
-                    <div>
-                        <textarea class="form-control" rows="3"></textarea>
-                    </div>
-                    <div class="sub-title">Detailed Description</div>
-                    <div>
-                        <textarea id="mytextarea"></textarea>
-                    </div>
-                    <br>
-                    <div class="panel-footer text-right" style="background-color: inherit">
-                        <a class="btn btn-success" href="/raisedDetail">SAVE</a>
-                        <a class="btn btn-default" href="/home">CANCEL</a>
-                    </div>
+
                 </div>
             </div>
         </div>
@@ -71,8 +71,18 @@
 </div>
 
 <script>
+    var img = '';
+    var title = '';
+    var target = 0;
+    var deadLine = new Date();
+    var brief = '';
+    var description = '';
+
     var loadFile = function(event) {
         var output = document.getElementById('image');
         output.src = URL.createObjectURL(event.target.files[0]);
     };
+
+    $(function(){
+    })
 </script>

@@ -31,10 +31,12 @@
             <img src="images/login-logo.png" alt=""/>
         </div>
         <div class="login-wrap">
-            <input type="text" class="form-control" placeholder="User ID" autofocus>
-            <input type="password" class="form-control" placeholder="Password">
+            <form role="form" action="/login" method="post">
+            <input id="email-input" type="text" class="form-control" name="email" placeholder="User ID" autofocus>
+            <input id="password-input" type="password" class="form-control" name="password" placeholder="Password">
 
-            <a class="btn btn-lg btn-login btn-block"  href="/home"><i class="fa fa-check"></i></a>
+            <a id="login-btn" class="btn btn-lg btn-login btn-block" type="submit"><i class="fa fa-check"></i></a>
+            </form>
             <!--<button class="btn btn-lg btn-login btn-block" type="submit">-->
                 <!--<i class="fa fa-check"></i>-->
             <!--</button>-->
@@ -86,9 +88,37 @@
 <!-- Placed js at the end of the document so the pages load faster -->
 
 <!-- Placed js at the end of the document so the pages load faster -->
-<script src="/javascripts/jquery-1.10.2.min.js"></script>
-<script src="/javascripts/bootstrap.min.js"></script>
+<script src="/assets/js/jquery-1.10.2.js"></script>
+<script src="/assets/js/bootstrap.min.js"></script>
 <script src="/javascripts/modernizr.min.js"></script>
 
 </body>
+<script>
+    $(function(){
+        var email = "";
+        $('#email-input').change(function(){
+            email = $(this).prop('value');
+        });
+        var password;
+        $('#password-input').change(function(){
+            password = $(this).prop('value');
+        });
+        $("#login-btn").click(function(){
+            $.ajax('/login',{
+                method:'post',
+                data:{
+                    email:email,
+                    password:password
+                }
+            }).success(function (data,status,code) {
+                console.log(data,code);
+                switch(data.data){
+                    case 'succeed':location.href='/home';break;
+                    case 'wrongPwd':alert('wrong password');break;
+                    case 'notFound':alert('not exist');
+                }
+            })
+        })
+    })
+</script>
 </html>

@@ -23,9 +23,6 @@
     <link href='http://fonts.useso.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
     <link rel="stylesheet" href="/assets/js/Lightweight-Chart/cssCharts.css">
     <link rel="stylesheet" type="text/css" href="/javascripts/bootstrap-datepicker/css/datepicker-custom.css" />
-    <!--<link rel="stylesheet" type="text/css" href="/javascripts/bootstrap-timepicker/css/timepicker.css" />-->
-    <!--<link rel="stylesheet" type="text/css" href="/javascripts/bootstrap-daterangepicker/daterangepicker-bs3.css" />-->
-    <!--<link rel="stylesheet" type="text/css" href="/javascripts/bootstrap-datetimepicker/css/datetimepicker-custom.css" />-->
     <!-- Editor -->
     <script src='//cdn.tinymce.com/4/tinymce.min.js'></script>
     <script>
@@ -64,7 +61,7 @@
                     <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                     </li>
                     <li class="divider"></li>
-                    <li><a href="/"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                    <li><a href="/logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                     </li>
                 </ul>
                 <!-- /.dropdown-user -->
@@ -76,71 +73,17 @@
     <nav class="navbar-default navbar-side" role="navigation">
         <div class="sidebar-collapse">
             <ul class="nav" id="main-menu">
-                <li>
-                    <a class="menu-tag new" href="/newProj"><i class="fa fa-plus"></i> New</a>
-                </li>
-
+                {{#if session.isAdmin}}
+                    <li>
+                        <a class="menu-tag new" href="/newProj"><i class="fa fa-plus"></i> New</a>
+                    </li>
+                {{/if}}
                 <li>
                     <a class="menu-tag all" href="/home"><i class="fa fa-dashboard"></i> All</a>
                 </li>
                 <li>
                     <a class="menu-tag funded" href="/funded"><i class="fa fa-flag"></i> Funded</a>
                 </li>
-
-                <!--<li>-->
-                    <!--<a href="#"><i class="fa fa-sitemap"></i> Charts<span class="fa arrow"></span></a>-->
-                    <!--<ul class="nav nav-second-level">-->
-                        <!--<li>-->
-                            <!--<a href="chart.html">Charts JS</a>-->
-                        <!--</li>-->
-                        <!--<li>-->
-                            <!--<a href="morris-chart.html">Morris Chart</a>-->
-                        <!--</li>-->
-                    <!--</ul>-->
-                <!--</li>-->
-
-                <!--<li>-->
-                    <!--<a href="tab-panel.html"><i class="fa fa-qrcode"></i> Tabs & Panels</a>-->
-                <!--</li>-->
-
-                <!--<li>-->
-                    <!--<a href="table.html"><i class="fa fa-table"></i> Responsive Tables</a>-->
-                <!--</li>-->
-                <!--<li>-->
-                    <!--<a href="form.html"><i class="fa fa-edit"></i> Forms </a>-->
-                <!--</li>-->
-
-
-                <!--<li>-->
-                    <!--<a href="#"><i class="fa fa-sitemap"></i> Multi-Level Dropdown<span class="fa arrow"></span></a>-->
-                    <!--<ul class="nav nav-second-level">-->
-                        <!--<li>-->
-                            <!--<a href="#">Second Level Link</a>-->
-                        <!--</li>-->
-                        <!--<li>-->
-                            <!--<a href="#">Second Level Link</a>-->
-                        <!--</li>-->
-                        <!--<li>-->
-                            <!--<a href="#">Second Level Link<span class="fa arrow"></span></a>-->
-                            <!--<ul class="nav nav-third-level">-->
-                                <!--<li>-->
-                                    <!--<a href="#">Third Level Link</a>-->
-                                <!--</li>-->
-                                <!--<li>-->
-                                    <!--<a href="#">Third Level Link</a>-->
-                                <!--</li>-->
-                                <!--<li>-->
-                                    <!--<a href="#">Third Level Link</a>-->
-                                <!--</li>-->
-
-                            <!--</ul>-->
-
-                        <!--</li>-->
-                    <!--</ul>-->
-                <!--</li>-->
-                <!--<li>-->
-                    <!--<a href="empty.html"><i class="fa fa-fw fa-file"></i> Empty Page</a>-->
-                <!--</li>-->
             </ul>
 
         </div>
@@ -148,6 +91,9 @@
     </nav>
     <!-- /. NAV SIDE  -->
 
+    <script src="/assets/js/jquery-1.10.2.js"></script>
+    <!-- Bootstrap Js -->
+    <script src="/assets/js/bootstrap.min.js"></script>
     <div id="page-wrapper">
         {{{body}}}
         <!-- /. PAGE INNER  -->
@@ -157,15 +103,9 @@
 <!-- /. WRAPPER  -->
 <!-- JS Scripts-->
 <!-- jQuery Js -->
-<script src="/assets/js/jquery-1.10.2.js"></script>
-<!-- Bootstrap Js -->
-<script src="/assets/js/bootstrap.min.js"></script>
 
 <!-- Metis Menu Js -->
 <script src="/assets/js/jquery.metisMenu.js"></script>
-<!-- Morris Chart Js -->
-<script src="/assets/js/morris/raphael-2.1.0.min.js"></script>
-<script src="/assets/js/morris/morris.js"></script>
 
 
 <script src="/assets/js/easypiechart.js"></script>
@@ -185,14 +125,6 @@
 
 <!--pickers plugins-->
 <script type="text/javascript" src="/javascripts/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
-<!--<script type="text/javascript" src="/javascripts/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>-->
-<!--<script type="text/javascript" src="/javascripts/bootstrap-daterangepicker/moment.min.js"></script>-->
-<!--<script type="text/javascript" src="/javascripts/bootstrap-daterangepicker/daterangepicker.js"></script>-->
-<!--<script type="text/javascript" src="/javascripts/bootstrap-timepicker/js/bootstrap-timepicker.js"></script>-->
-
-
-<!--pickers initialization-->
-<!--<script src="/javascripts/pickers-init.js"></script>-->
 
 </body>
 
@@ -211,7 +143,7 @@
 //        var tagAs = $('#main-menu').find('a');
 //        alert(document.location.pathname);
         switch(document.location.pathname){
-            case '/':setActiveMenu($('.menu-tag.all'));break;
+            case '/home':setActiveMenu($('.menu-tag.all'));break;
             case '/funded':setActiveMenu($('.menu-tag.funded'));break;
             case '/raised':setActiveMenu($('.menu-tag.raised'));break;
             case '/newProj':setActiveMenu($('.menu-tag.new'));break;

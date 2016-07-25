@@ -4,13 +4,27 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var session = require('express-session');
 
-var routes = require('./routes/index');
-var users = require('./routes/users');
-var proj = require('./routes/project');
+//import lib
+var resSession = require('./lib/filter').resSession;
+
+var index = require('./routes/index');
+var loginRoute = require('./routes/json/login');
+var mainRoute = require('./routes/main');
+var Project = require('./routes/project');
 var hbs = require('express-handlebars');
+var mongoose = require('mongoose');
+
+//import models
+var Users = require('./models/Users').Users;
+
+mongoose.connect('mongodb://localhost/crowdchain');
 
 var app = express();
+
+// demodata();
+// var demodata = require('./help_utils/demoData').demoData;
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -28,11 +42,18 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: false }
+}));
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', routes);
-app.use('/users', users);
-app.use('/',proj);
+app.use('/', resSession, loginRoute);
+app.use('/', index);
+app.use('/', Project);
+app.use('/', mainRoute);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -64,6 +85,8 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
+
+
 
 
 module.exports = app;
