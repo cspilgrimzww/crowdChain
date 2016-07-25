@@ -19,13 +19,22 @@ router.get('/raisedDetail', filter.authorized_required, function(req, res, next)
             title:"raisedDetail"
         });
 });
-router.get('/projDetail', filter.authorized_required, function(req, res, next) {
-    var from = req.params.from;
-    console.log(from);
-    res.render('projDetail',
-        {
-            title:"ProjDetail"
-        });
+router.get('/projDetail/:id', filter.authorized_required, function(req, res, next) {
+    var id = req.params.id;
+    models.Project.findOne({_id:id}, function (err,result) {
+        if(err){
+            throw err;
+        }else {
+            return res.render('projDetail',{
+                project:result.toJson()
+            })
+        }
+    });
+    // console.log(from);
+    // res.render('projDetail',
+    //     {
+    //         title:"ProjDetail"
+    //     });
 });
 router.get('/fundedDetail', filter.authorized_required, function(req, res, next) {
     var from = req.params.from;

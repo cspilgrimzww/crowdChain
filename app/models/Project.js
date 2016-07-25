@@ -3,6 +3,7 @@
  */
 
 var mongoose = require('mongoose');
+// var contractInterface = require('../../crowdFunding/contractInterface');
 
 var Schema = mongoose.Schema;
 var _Project = new Schema({
@@ -21,11 +22,15 @@ var _Project = new Schema({
 
 _Project.methods.toJson = function(){
     var daysLeft=(this.deadline-(new Date()))/(1000*60*60*24).toFixed(0);
+    // var balance = contractInterface.getProjectBalance('0x'+this._id);
+    // console.log(balance);
     return {
+        id: this._id,
         title: this.title,
         brief: this.brief,
         deadline: this.deadline,
         targetAmount: this.targetAmount,
+        // raisedAmount: balance,
         raisedAmount: this.raisedAmount,
         image: this.image,
         description: this.description,
