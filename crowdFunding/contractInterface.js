@@ -112,7 +112,7 @@ function updateProjectBalance(projects){
  * @type {{init: init, listEntities: listEntities, transfer: transfer, updateBalance: updateBalance, updateProjectBalance: updateProjectBalance}}
  */
 module.exports = {
-    init: init,
+    // init: init,
     issue: issue,
     //listEntities: listEntities,
     transfer: transfer,
