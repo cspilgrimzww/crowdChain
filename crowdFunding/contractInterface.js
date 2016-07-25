@@ -4,7 +4,8 @@ var web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
 
 var abi = [{"constant":false,"inputs":[{"name":"to","type":"uint256"},{"name":"amount","type":"uint256"}],"name":"transfer","outputs":[],"type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"userBalanceMap","outputs":[{"name":"","type":"uint256"}],"type":"function"},{"constant":false,"inputs":[{"name":"userAddress","type":"address"}],"name":"addUser","outputs":[],"type":"function"},{"constant":true,"inputs":[{"name":"projectHash","type":"uint256"}],"name":"getProjectBalance","outputs":[{"name":"","type":"uint256"}],"type":"function"},{"constant":false,"inputs":[{"name":"account","type":"address"},{"name":"amount","type":"uint256"}],"name":"issue","outputs":[],"type":"function"},{"constant":false,"inputs":[{"name":"projectHash","type":"uint256"}],"name":"createProject","outputs":[],"type":"function"},{"constant":true,"inputs":[{"name":"account","type":"address"}],"name":"getBalance","outputs":[{"name":"","type":"uint256"}],"type":"function"},{"inputs":[],"type":"constructor"},{"anonymous":false,"inputs":[{"indexed":false,"name":"account","type":"address"},{"indexed":false,"name":"amount","type":"uint256"}],"name":"Issue","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"from","type":"address"},{"indexed":false,"name":"to","type":"uint256"},{"indexed":false,"name":"amount","type":"uint256"}],"name":"Transfer","type":"event"}];
 var myContract = web3.eth.contract(abi);
-var contractAddress = '0xe47fdd5bceb01cc0f65d5f9f1f838a97b7d33b05';
+var contractAddress = '0x58761bbd2bcbf5dfff0700d08ab139fab5e488d7';
+// transactionHash: "0xca343ab30a0248b08395c4079463012abad29de852fed41352fc90abed873c7c"
 var crowdFundingSystem = myContract.at(contractAddress);
 
 // //智能合约编译
@@ -15,11 +16,7 @@ var crowdFundingSystem = myContract.at(contractAddress);
 // //从ABI构建合约contract
 // var contract = web3.eth.contract(crowdFundABI);
 
-// var initializer = {
-// 	from:web3.eth.accounts[0],
-// 	data:crowdFundBIN,
-// 	gas:500000
-// };
+// var initializer = { from:web3.eth.accounts[0], data:crowdFundBIN, gas:500000 };
 //
 // /**
 //  *
