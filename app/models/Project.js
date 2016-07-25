@@ -33,7 +33,7 @@ _Project.methods.toJson = function(){
         funders: this.funders,
         createTime: this.createTime.toLocaleString(),
         percentage: (this.raisedAmount/this.targetAmount).toFixed(2),
-        daysLeft: daysLeft>0?daysLeft:'expired'
+        daysLeft: daysLeft>0?daysLeft.toFixed(0):'expired'
     }
 };
 var Project = mongoose.model('Project', _Project);

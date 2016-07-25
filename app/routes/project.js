@@ -44,6 +44,7 @@ router.post('/project', filter.admin_required, multipartMiddleware, function(req
             fs.readFile(temp_path, function (err, content) {
                 // 删除临时文件
                 var savePath = path.join(__dirname, '../public/images/projects/'+req.files.image.name);
+                console.log("savePath----"+savePath);
                 fs.writeFile(savePath, content, function (err) {
                     if (err){
                         throw err;
@@ -56,7 +57,7 @@ router.post('/project', filter.admin_required, multipartMiddleware, function(req
                             targetAmount: data.budget,
                             description: data.description,
                             deadline: data.deadline,
-                            image:'/public/images/projects/'+req.files.image.name,
+                            image:'/images/projects/'+req.files.image.name,
                             createTime: new Date()
                         });
                         console.log("new_proj::::"+JSON.stringify(new_proj));
