@@ -3,21 +3,22 @@
  */
 exports.authorized_required = function(req, res, next) {
     console.log("infilter req.session[session_id:"+req.session.id+"]"+JSON.stringify(req.session));
-    if (!req.session.user._id) {
+    if (!req.session.user) {
+        console.log('infilter redirected to /login');
         res.redirect('/login');
     } else {
         next();
     }
 }
 exports.admin_required = function(req, res, next) {
-    if (!req.session.user._id) {
-        if(!req.session.user.role != 'admin'){
+    if (!req.session.user) {
+        res.redirect('/login');
+    } else {
+        if(req.session.user.role != 'admin'){
             res.redirect('/login');
         }else {
             next();
         }
-    } else {
-        next();
     }
 }
 
