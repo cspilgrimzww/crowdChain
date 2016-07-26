@@ -12,6 +12,9 @@ router.get('/home', filter.authorized_required, function(req, res, next) {
         for(i in projects){
             list.push(projects[i].toJson());
         }
+        list.sort(function(a,b){
+            return a.createTime <=  b.createTime;
+        });
         res.render('allList', {
             projList: list
         });
