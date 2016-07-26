@@ -127,7 +127,7 @@ router.post('/projDetail/:id/fund', filter.authorized_required, multipartMiddlew
                         user.balance = Number(user.balance)-Number(data.fundAmount);
                         proj.raisedAmount += Number(data.fundAmount);
                         var tx = {
-                            user:{id:user._id,email:user.email},
+                            user:{id:user._id,email:user.email, name: user.name},
                             proj:{id:proj._id,title:proj.title,raisedAmount:proj.raisedAmount},
                             amount:data.fundAmount
                         };

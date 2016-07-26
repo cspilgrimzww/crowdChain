@@ -19,7 +19,7 @@ router.post('/comment',filter.authorized_required, multipartMiddleware, function
             proj.comments.push({
                 time: new Date().toLocaleString(),
                 content: data.content,
-                email:req.session.user.email
+                name:req.session.user.name
             });
             proj.save();
             res.redirect('/projDetail/'+data.projId);

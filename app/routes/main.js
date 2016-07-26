@@ -34,20 +34,26 @@ router.get('/funded', filter.authorized_required, function(req, res, next) {
         }
     }
     var list=[];
-    for(j in fundedList){
-        console.log(fundedList[j]);
-        models.Project.findOne({_id:fundedList[j]},function (err, project) {
-            if(project){
-                list.push(project.toJson());
-            }
+    if(fundedList.length>0){
+        for(j in fundedList){
+            console.log(fundedList[j]);
+            models.Project.findOne({_id:fundedList[j]},function (err, project) {
+                if(project){
+                    list.push(project.toJson());
+                }
 
-            if(list.length >= fundedList.length){
-                return res.render('fundedList', {
-                    projList: list
-                });
-            }
-            console.log('project-----'+project.toJson());
-        })
+                if(list.length >= fundedList.length){
+                    return res.render('fundedList', {
+                        projList: list
+                    });
+                }
+                console.log('project-----'+project.toJson());
+            })
+        }
+    }else{
+        return res.render('fundedList', {
+            projList: list
+        });
     }
 });
 

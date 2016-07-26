@@ -9,6 +9,7 @@ var Schema = mongoose.Schema;
 var _User = new Schema({
     email : { type: String, required: true, unique: true },
     password : { type: String, required: true},
+    name: { type: String, required: true },
     accountAddr : { type: String, required: true},
     createTime : { type: Date, default: Date.now },
     totalAssets:{ type: Number, default:0},
