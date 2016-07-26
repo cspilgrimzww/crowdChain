@@ -14,10 +14,10 @@
             <div class="col-md-12">
                 <div class="panel">
                     <div class="panel-body">
-                        <h1 class="text-center mtop35"><a href="#">{{title}}</a></h1>
+                        <h1 class="text-center mtop35"><a href="/fundedDetail/{{id}}">{{title}}</a></h1>
                         <p class="text-center auth-row">
                             <!--By <a href="#">Anthony Jones</a>   |   27 December 2014   | <a href="#">5 Comments</a>-->
-                            {{createTime}}   | <a href="#">{{ comments.length }} Comments</a>
+                            {{createTime}}   | <a href="/fundedDetail/{{id}}/#comments">{{ comments.length }} Comments</a>
                         </p>
                         <div class="blog-img-wide" style="height: 200px;">
                             <img src="{{image}}" width="100%" style="height: inherit;padding-bottom: 0;">
@@ -62,50 +62,5 @@
                 </div>
             </div>
         {{/each}}
-        <!--<div class="col-md-12">-->
-            <!--<div class="panel">-->
-                <!--<div class="panel-body">-->
-                    <!--<h1 class="text-center mtop35"><a href="#">Neque porro quisquam est qui dolo rem ipsum quio</a></h1>-->
-                    <!--<p class="text-center auth-row">-->
-                        <!--&lt;!&ndash;By <a href="#">Anthony Jones</a>   |   27 December 2014   | <a href="#">5 Comments</a>&ndash;&gt;-->
-                        <!--27 December 2014   | <a href="#">5 Comments</a>-->
-                    <!--</p>-->
-                    <!--<div class="blog-img-wide" style="height: 200px;">-->
-                        <!--<img src="images/blog/blog-wide-img.jpg" width="100%" style="height: inherit;padding-bottom: 0;">-->
-                    <!--</div>-->
-                    <!--<p>Donec ultrices faucibus rutrum. Phasellus sodales vulputate urna, vel accumsan augue egestas ac. Donec vitae leo at sem lobortis porttitor eu consequat risus. Mauris sed congue orci.-->
-                    <!--</p>-->
-                    <!--<a href="/projDetail" class="more">Continue Reading</a>-->
-                    <!--<hr>-->
-                    <!--<div class="status">-->
-                        <!--<div class="project-status">-->
-                            <!--<div class="progress progress-xs">-->
-                                <!--<div class="progress-bar progress-bar-warning progress-bar-striped" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 70%">-->
-                                    <!--<span class="">70%</span>-->
-                                <!--</div>-->
-                            <!--</div>-->
-                            <!--<div class="project-raised">-->
-                                <!--<span class="project-raised-price">$ 280,000</span>-->
-                                <!--<span class="project-raised-label">raised</span>-->
-                            <!--</div>-->
-                        <!--</div>-->
-                        <!--<ul class="project-info">-->
-                            <!--<li class="project-info-unit">-->
-                                <!--<span class="unit-label">Target</span>-->
-                                <!--<span class="unit-figure">$ 400,000</span>-->
-                            <!--</li>-->
-                            <!--<li class="project-info-unit">-->
-                                <!--<span class="unit-label">Funders</span>-->
-                                <!--<span class="unit-figure">104</span>-->
-                            <!--</li>-->
-                            <!--<li class="project-info-unit ">-->
-                                <!--<span class="unit-label">Days left</span>-->
-                                <!--<span class="unit-figure">13</span>-->
-                            <!--</li>-->
-                        <!--</ul>-->
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
-        <!--</div>-->
     </div>
 </div>

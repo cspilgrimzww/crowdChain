@@ -4792,5 +4792,21 @@ ol.comment-list {
     color: #f0ad4e;
 }
 
+.normal-chat .message span.name {
+    font-size: 14px;
+    color: #65cea7;
+}
+
+.normal-chat .message span.datetime {
+    font-size: 14px;
+    color: #ADADAD;
+}
+
+.normal-chat .message span.body {
+    font-size: 14px;
+    color: #7a7676;
+}
+
+
 
 
