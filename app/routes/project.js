@@ -60,7 +60,13 @@ router.post('/project', filter.admin_required, multipartMiddleware, function(req
         if (temp_path) {
             fs.readFile(temp_path, function (err, content) {
                 // 删除临时文件
-                var savePath = path.join(__dirname, '../public/images/projects/'+req.files.image.name);
+                var fileType = req.files.image.type;
+                console.log("fileType::::"+fileType);
+                var imageType = fileType.split('/')[1];
+                console.log("imageType::::"+imageType);
+                var imageName = new Date().getTime() + '.' + imageType;
+                console.log("imageName::::"+imageName);
+                var savePath = path.join(__dirname, '../public/images/projects/'+imageName);
                 console.log("savePath----"+savePath);
                 fs.writeFile(savePath, content, function (err) {
                     if (err){
@@ -74,12 +80,17 @@ router.post('/project', filter.admin_required, multipartMiddleware, function(req
                             targetAmount: data.budget,
                             description: data.description,
                             deadline: data.deadline,
-                            image:'/images/projects/'+req.files.image.name,
+                            image:'/images/projects/'+imageName.toString(),
                             createTime: new Date()
                         });
                         console.log("new_proj::::"+JSON.stringify(new_proj));
-                        new_proj.save();
-                        res.redirect('/newProj');
+                        new_proj.save(function(err) {
+                            if(!err) {
+                                res.redirect('/raisedDetail/'+new_proj._id);
+                            } else {
+                                throw err;
+                            }
+                        });
                     }
                     console.log("Save image success");
                     fs.unlink(temp_path);

@@ -4787,6 +4787,10 @@ ol.comment-list {
     color: #65cea7;
 }
 
+.progress-percentage {
+    float: right;
+    color: #f0ad4e;
+}
 
 
 

@@ -55,7 +55,7 @@
                         </div>
                         <div class="sub-title">Detailed Description</div>
                         <div>
-                            <textarea name="description" id="mytextarea"></textarea>
+                            <textarea name="description" id="description"></textarea>
                         </div>
                         <br>
                         <div class="panel-footer text-right" style="background-color: inherit">
@@ -70,14 +70,12 @@
     </div>
 </div>
 
-<script src='//cdn.tinymce.com/4/tinymce.min.js'></script>
+<script src='/ckeditor/ckeditor.js'></script>
 <script>
     var loadFile = function(event) {
         var output = document.getElementById('image');
         output.src = URL.createObjectURL(event.target.files[0]);
     };
 
-    tinymce.init({
-        selector: '#mytextarea'
-    });
+    CKEDITOR.replace( 'description' );
 </script>
