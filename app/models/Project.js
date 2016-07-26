@@ -40,7 +40,7 @@ _Project.methods.toJson = function(){
         comments: this.comments,
         funders: this.funders,
         createTime: this.createTime.toDateString(),
-        percentage: (this.raisedAmount/this.targetAmount).toFixed(2),
+        percentage: (100*this.raisedAmount/this.targetAmount).toFixed(2),
         daysLeft: daysLeft>0?daysLeft.toFixed(0):'expired'
     }
 };
