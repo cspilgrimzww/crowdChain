@@ -4,6 +4,6 @@
 module.exports = function(){
     return {
         Project: require('./Project'),
-        Users: require('./Users')
+        Users: require('./Users').Users
     }
 }

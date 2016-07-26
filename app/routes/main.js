@@ -23,9 +23,22 @@ router.get('/raised', filter.authorized_required, function(req, res, next) {
     });
 });
 router.get('/funded', filter.authorized_required, function(req, res, next) {
-    res.render('fundedList', {
-        title: 'Home'
-    });
+    var fundedList = req.session.user.fundedProj;
+    var list=[];
+    for(i in fundedList){
+        console.log(fundedList[i].proj.id);
+        models.Project.findOne({_id:fundedList[i].proj.id},function (err, project) {
+            if(project){
+                list.push(project.toJson());
+            }
+            console.log('project-----'+project.toJson());
+            if(i==fundedList.length-1){
+                res.render('fundedList', {
+                    projList: list
+                });
+            }
+        })
+    }
 });
 
 router.get('/newProj',filter.authorized_required, function (req,res,next) {
