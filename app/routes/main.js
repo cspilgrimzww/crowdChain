@@ -35,12 +35,14 @@ router.get('/funded', filter.authorized_required, function(req, res, next) {
                 list.push(project.toJson());
             }
             console.log('project-----'+project.toJson());
-            if(i==fundedList.length-1){
-                res.render('fundedList', {
-                    projList: list
-                });
-            }
         })
+    }
+    while(1){
+        if(i>=fundedList.length-1){
+            return res.render('fundedList', {
+                projList: list
+            });
+        }
     }
 });
 
