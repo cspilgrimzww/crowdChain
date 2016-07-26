@@ -36,7 +36,7 @@ _Project.methods.toJson = function(){
         description: this.description,
         comments: this.comments,
         funders: this.funders,
-        createTime: this.createTime.toLocaleString(),
+        createTime: this.createTime.toDateString(),
         percentage: (this.raisedAmount/this.targetAmount).toFixed(2),
         daysLeft: daysLeft>0?daysLeft.toFixed(0):'expired'
     }

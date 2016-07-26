@@ -56,7 +56,13 @@ router.post('/project', filter.admin_required, multipartMiddleware, function(req
         if (temp_path) {
             fs.readFile(temp_path, function (err, content) {
                 // 删除临时文件
-                var savePath = path.join(__dirname, '../public/images/projects/'+req.files.image.name);
+                var fileType = req.files.image.type;
+                console.log("imageType::::"+fileType);
+                var imageType = fileType.split('/')[1];
+                console.log("imageType::::"+imageType);
+                var imageName = new Date().getTime() + '.' + imageType;
+                console.log("imageType::::"+imageName);
+                var savePath = path.join(__dirname, '../public/images/projects/'+imageName);
                 console.log("savePath----"+savePath);
                 fs.writeFile(savePath, content, function (err) {
                     if (err){
@@ -70,7 +76,7 @@ router.post('/project', filter.admin_required, multipartMiddleware, function(req
                             targetAmount: data.budget,
                             description: data.description,
                             deadline: data.deadline,
-                            image:'/images/projects/'+req.files.image.name,
+                            image:'/images/projects/'+imageName,
                             createTime: new Date()
                         });
                         console.log("new_proj::::"+JSON.stringify(new_proj));
