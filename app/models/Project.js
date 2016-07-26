@@ -24,9 +24,22 @@ _Project.methods.toJson = function(){
     var daysLeft=(this.deadline-(new Date()))/(1000*60*60*24).toFixed(0);
     // var balance = contractInterface.getProjectBalance('0x'+this._id);
     // console.log(balance);
-    var comments = this.comments.sort(function(a,b){
+    this.comments.sort(function(a,b){
         return a.time<=b.time;
     });
+    var usersList = [];
+    for(i in this.funders){
+        if(this.funders[i].user){
+            usersList.push(this.funders[i].user);
+        }
+    }
+    var tmpList = [];
+    for (i in usersList){
+        if(tmpList.indexOf(String(usersList[i].id))<0){
+            tmpList.push(String(usersList[i].id));
+        }
+    }
+    console.log(usersList);
     return {
         id: this._id,
         title: this.title,
@@ -39,6 +52,7 @@ _Project.methods.toJson = function(){
         description: this.description,
         comments: this.comments,
         funders: this.funders,
+        fundersCount: tmpList.length,
         createTime: this.createTime.toLocaleString(),
         percentage: (100*this.raisedAmount/this.targetAmount).toFixed(2),
         daysLeft: daysLeft>0?daysLeft.toFixed(0):'expired'

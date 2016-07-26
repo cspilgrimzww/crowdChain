@@ -26,23 +26,28 @@ router.get('/raised', filter.authorized_required, function(req, res, next) {
     });
 });
 router.get('/funded', filter.authorized_required, function(req, res, next) {
-    var fundedList = req.session.user.fundedProj;
+    var fundedProj = req.session.user.fundedProj;
+    var fundedList = [];
+    for(i in fundedProj){
+        if(!(fundedList.indexOf(fundedProj[i].proj.id)>=0)){
+            fundedList.push(fundedProj[i].proj.id);
+        }
+    }
     var list=[];
-    for(i in fundedList){
-        console.log(fundedList[i].proj.id);
-        models.Project.findOne({_id:fundedList[i].proj.id},function (err, project) {
+    for(j in fundedList){
+        console.log(fundedList[j]);
+        models.Project.findOne({_id:fundedList[j]},function (err, project) {
             if(project){
                 list.push(project.toJson());
             }
+
+            if(list.length >= fundedList.length){
+                return res.render('fundedList', {
+                    projList: list
+                });
+            }
             console.log('project-----'+project.toJson());
         })
-    }
-    while(1){
-        if(i>=fundedList.length-1){
-            return res.render('fundedList', {
-                projList: list
-            });
-        }
     }
 });
 
