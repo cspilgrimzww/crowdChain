@@ -11,9 +11,10 @@ var _User = new Schema({
     password : { type: String, required: true},
     accountAddr : { type: String, required: true},
     createTime : { type: Date, default: Date.now },
-    totalAssets:{ type: Number },
-    balance: { type: Number },
-    role: {type:String, required:true, default:'employee'}
+    totalAssets:{ type: Number, default:0},
+    balance: { type: Number, default:0},
+    role: {type:String, required:true, default:'employee'},
+    fundedProj:{ type: Array}
 });
 //Password verification
 _User.methods.comparePassword = function(password, cb) {    

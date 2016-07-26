@@ -23,7 +23,7 @@
             <div class="status">
                 <div class="project-status">
                     <div class="progress progress-xs">
-                        <div class="progress-bar progress-bar-warning progress-bar-striped" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 70%">
+                        <div class="progress-bar progress-bar-warning progress-bar-striped" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: {{percentage}}%">
                             <span class="">{{percentage}}%</span>
                         </div>
                     </div>
@@ -60,27 +60,17 @@
                         <table class="table">
                             <thead>
                             <tr>
-                                <th>#</th>
                                 <th>Funder Name</th>
                                 <th class="">Funded Amount($)</th>
                             </tr>
                             </thead>
                             <tbody>
+                            {{#each funders}}
                             <tr>
-                                <td>1</td>
-                                <td>Mark Otto</td>
-                                <td style="color: #65cea7;">10,000</td>
+                                <td>{{user.email}}</td>
+                                <td style="color: #65cea7;">{{amount}}</td>
                             </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Jacob Thornton</td>
-                                <td style="color: #65cea7;">5,000</td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>Larry the Bird</td>
-                                <td style="color: #65cea7;">2,000</td>
-                            </tr>
+                            {{/each}}
                             </tbody>
                         </table>
                     </div>
@@ -91,39 +81,19 @@
                     <div class="panel-heading">Comments</div>
                     <div class="panel-body">
                         <ul class="chats normal-chat">
-                            <li class="in">
-                                <img src="images/photos/user1.png" alt="" class="avatar">
-                                <div class="message ">
-                                    <span class="arrow"></span>
-                                    <a class="name" href="#">Jone Doe</a>
-                                    <span class="datetime">at Apr 28, 2014 1:33</span>
-                                    <span class="body">
-                                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. dolore magna aliquam erat volutpat. dolore magna aliquam erat volutpat.
-                                    </span>
-                                </div>
-                            </li>
-                            <li class="in">
-                                <img src="images/photos/user2.png" alt="" class="avatar">
-                                <div class="message">
-                                    <span class="arrow"></span>
-                                    <a class="name" href="#">Margarita Rose</a>
-                                    <span class="datetime">at Apr 28, 2014 1:35</span>
-                                    <span class="body">
-                                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
-                                    </span>
-                                </div>
-                            </li>
-                            <li class="in">
-                                <img src="images/photos/user1.png" alt="" class="avatar">
-                                <div class="message">
-                                    <span class="arrow"></span>
-                                    <a class="name" href="#">Jone Doe</a>
-                                    <span class="datetime">at Apr 28, 2014 1:36</span>
-                                    <span class="body">
-                                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
-                                    </span>
-                                </div>
-                            </li>
+                            {{#each comments}}
+                                <li class="in">
+                                    <img src="/images/photos/user1.png" alt="" class="avatar">
+                                    <div class="message ">
+                                        <span class="arrow"></span>
+                                        <a class="name" href="#">{{email}}</a>
+                                        <span class="datetime">at {{time}}</span>
+                                        <span class="body">
+                                            {{content}}
+                                        </span>
+                                    </div>
+                                </li>
+                            {{/each}}
                         </ul>
                     </div>
                 </div>

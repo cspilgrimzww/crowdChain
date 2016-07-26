@@ -40,13 +40,17 @@ router.get('/projDetail/:id', filter.authorized_required, function(req, res, nex
     //         title:"ProjDetail"
     //     });
 });
-router.get('/fundedDetail', filter.authorized_required, function(req, res, next) {
-    var from = req.params.from;
-    console.log(from);
-    res.render('fundedDetail',
-        {
-            title:"fundedDetail"
-        });
+router.get('/fundedDetail/:id', filter.authorized_required, function(req, res, next) {
+    var id = req.params.id;
+    models.Project.findOne({_id:id}, function (err,result) {
+        if(err){
+            throw err;
+        }else {
+            return res.render('fundedDetail',{
+                project:result.toJson()
+            })
+        }
+    });
 });
 
 router.post('/project', filter.admin_required, multipartMiddleware, function(req, res){
@@ -97,6 +101,44 @@ router.post('/project', filter.admin_required, multipartMiddleware, function(req
             data:'failed'
         })
     }
+});
+
+
+router.post('/projDetail/:id/fund', filter.authorized_required, multipartMiddleware, function (req, res) {
+    var id = req.params.id;
+    var data = req.body;
+    console.log(data);
+    models.Project.findOne({_id:id}, function (err, proj) {
+        if(err){
+            throw err;
+        }else {
+            models.Users.findOne({_id: req.session.user._id}, function (err, user) {
+                if(err){
+                    throw err;
+                }else{
+                    if(data.fundAmount > user.balance){
+                        return res.redirect('/404');
+                    }else {
+                        user.balance = Number(user.balance)-Number(data.fundAmount);
+                        proj.raisedAmount += Number(data.fundAmount);
+                        var tx = {
+                            user:{id:user._id,email:user.email},
+                            proj:{id:proj._id,title:proj.title,raisedAmount:proj.raisedAmount},
+                            amount:data.fundAmount
+                        };
+                        proj.funders.push(tx);
+                        user.fundedProj.push(tx);
+                        proj.save();
+                        user.save();
+                        req.session.user=user;
+                        return res.redirect('/projDetail/'+id);
+                    }
+
+                }
+            })
+        }
+    })
+    
 });
 
 module.exports = router;

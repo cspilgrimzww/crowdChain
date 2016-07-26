@@ -13,6 +13,7 @@ var index = require('./routes/index');
 var loginRoute = require('./routes/json/login');
 var mainRoute = require('./routes/main');
 var Project = require('./routes/project');
+var comment = require('./routes/comment');
 var hbs = require('express-handlebars');
 var mongoose = require('mongoose');
 
@@ -23,8 +24,8 @@ mongoose.connect('mongodb://localhost/crowdchain');
 
 var app = express();
 
-// var demodata = require('./help_utils/demoData').demoData;
-// demodata();
+var demodata = require('./help_utils/demoData').demoData;
+demodata();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -54,6 +55,7 @@ app.use('/', resSession, loginRoute);
 app.use('/', index);
 app.use('/', Project);
 app.use('/', mainRoute);
+app.use('/', comment);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -69,9 +71,10 @@ app.use(function(req, res, next) {
 if (app.get('env') === 'development') {
   app.use(function(err, req, res, next) {
     res.status(err.status || 500);
-    res.render('error', {
+    res.render('404', {
       message: err.message,
-      error: err
+      error: err,
+      layout:false
     });
   });
 }

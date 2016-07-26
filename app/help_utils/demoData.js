@@ -10,7 +10,8 @@ var demoData = function () {
         password : '123456',
         accountAddr : "0xab338cc8d88f09ee29203a992c228ec5",
         createTime : new Date(),
-        assets: 980000000,
+        totalAssets: 980000000,
+        balance: 980000000,
         role: 'employee'
     });
     var admin = new User({
@@ -18,7 +19,7 @@ var demoData = function () {
         password : '123456',
         accountAddr : "0xab338cc8d3212ccab203a992c228ec5d",
         createTime : new Date(),
-        assets: 0,
+        totalAssets: 0,
         role: 'admin'
     });
     new_user1.save();

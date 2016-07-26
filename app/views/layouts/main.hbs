@@ -140,13 +140,13 @@
         $(".selectbox").select2();
 //        var tagAs = $('#main-menu').find('a');
 //        alert(document.location.pathname);
-        switch(document.location.pathname){
-            case '/home':setActiveMenu($('.menu-tag.all'));break;
-            case '/funded':;
-            case '/fundedDetail':setActiveMenu($('.menu-tag.funded'));break;
-            case '/raisedDetail':;
+        var firstBreadCrumb = $('.breadcrumb').find('li')[0];
+        console.log(firstBreadCrumb.innerHTML);
+        switch(firstBreadCrumb.innerText){
+            case 'All':setActiveMenu($('.menu-tag.all'));break;
+            case 'New':setActiveMenu($('.menu-tag.new'));break;
+            case 'Funded':setActiveMenu($('.menu-tag.funded'));break;
             case '/raised':setActiveMenu($('.menu-tag.raised'));break;
-            case '/newProj':setActiveMenu($('.menu-tag.new'));break;
         }
     };
     foo();
