@@ -17,7 +17,7 @@ router.post('/comment',filter.authorized_required, multipartMiddleware, function
             throw err;
         }else {
             proj.comments.push({
-                time: new Date(),
+                time: new Date().toLocaleString(),
                 content: data.content,
                 email:req.session.user.email
             });

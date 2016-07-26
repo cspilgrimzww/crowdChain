@@ -13,11 +13,23 @@
             <div class="col-md-12">
                 <div class="panel">
                     <div class="panel-body">
-                        <h1 class="text-center mtop35"><a href="#">{{title}}</a></h1>
+                        {{#if ../session.isAdmin}}
+                        <h1 class="text-center mtop35">
+                            <a href="/raisedDetail/{{id}}">{{title}}</a>
+                        </h1>
                         <p class="text-center auth-row">
                             <!--By <a href="#">Anthony Jones</a>   |   27 December 2014   | <a href="#">5 Comments</a>-->
-                            {{createTime}}   | <a href="#">{{ comments.length }} Comments</a>
+                            {{createTime}}   | <a href="/raisedDetail/{{id}}/#comments">{{ comments.length }} Comments</a>
                         </p>
+                        {{else}}
+                        <h1 class="text-center mtop35">
+                            <a href="/projDetail/{{id}}">{{title}}</a>
+                        </h1>
+                        <p class="text-center auth-row">
+                            <!--By <a href="#">Anthony Jones</a>   |   27 December 2014   | <a href="#">5 Comments</a>-->
+                            {{createTime}}   | <a href="/projDetail/{{id}}/#comments">{{ comments.length }} Comments</a>
+                        </p>
+                        {{/if}}
                         <div class="blog-img-wide" style="height: 200px;">
                             <img src="{{image}}" width="100%" style="height: inherit;padding-bottom: 0;">
                         </div>

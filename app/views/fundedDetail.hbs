@@ -15,7 +15,7 @@
                 <div class="panel-body">
                     <h1 class="text-center mtop35">{{title}}</h1>
                     <p class="text-center auth-row">
-                        {{ createTime}}   | <a href="#">{{comments.length}} Comments</a>
+                        {{ createTime}}   | <a href="#comments">{{comments.length}} Comments</a>
                     </p>
                     <div class="blog-img-wide" style="height: 200px;">
                         <img src="{{image}}" width="100%" style="height: inherit;padding-bottom: 0;">
@@ -60,7 +60,7 @@
                 </div>
             </div>
         </div>
-        <div class="panel">
+        <div class="panel" name="comments" id="comments">
             <div class="panel-heading">Comments</div>
             <div class="panel-body">
                 <ul class="chats normal-chat">
