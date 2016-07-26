@@ -3,7 +3,7 @@
  */
 
 var mongoose = require('mongoose');
-// var contractInterface = require('../../crowdFunding/contractInterface');
+var contractInterface = require('../../crowdFunding/contractInterface');
 
 var Schema = mongoose.Schema;
 var _Project = new Schema({
@@ -22,7 +22,7 @@ var _Project = new Schema({
 
 _Project.methods.toJson = function(){
     var daysLeft=(this.deadline-(new Date()))/(1000*60*60*24).toFixed(0);
-    // var balance = contractInterface.getProjectBalance('0x'+this._id);
+    var projectBalance = contractInterface.getProjectBalance('0x'+this._id);
     // console.log(balance);
     var comments = this.comments.sort(function(a,b){
         return a.time<=b.time;
@@ -33,8 +33,8 @@ _Project.methods.toJson = function(){
         brief: this.brief,
         deadline: this.deadline,
         targetAmount: this.targetAmount,
-        // raisedAmount: balance,
-        raisedAmount: this.raisedAmount,
+        raisedAmount: projectBalance,
+        // raisedAmount: this.raisedAmount,
         image: this.image,
         description: this.description,
         comments: this.comments,

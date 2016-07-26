@@ -9,6 +9,7 @@ var fs = require('fs');
 var path = require('path');
 var config = require('../config');
 var filter = require('../lib/filter');
+var contractInterface = require('../../crowdFunding/contractInterface');
 
 /* GET home page. */
 router.get('/raisedDetail/:id', filter.authorized_required, function(req, res, next) {
@@ -23,12 +24,16 @@ router.get('/raisedDetail/:id', filter.authorized_required, function(req, res, n
         }
     });
 });
+
+// show project details
 router.get('/projDetail/:id', filter.authorized_required, function(req, res, next) {
     var id = req.params.id;
     models.Project.findOne({_id:id}, function (err,result) {
         if(err){
             throw err;
         }else {
+            // var projectBalance = contractInterface.getProjectBalance(id);
+            // result.raisedAmount = Number(projectBalance);
             return res.render('projDetail',{
                 project:result.toJson()
             })
@@ -97,10 +102,12 @@ router.post('/project', filter.admin_required, multipartMiddleware, function(req
     }
 });
 
-
+// fund a project
 router.post('/projDetail/:id/fund', filter.authorized_required, multipartMiddleware, function (req, res) {
     var id = req.params.id;
     var data = req.body;
+    var amount = data.fundAmount;
+    var accountAdd = req.session.user.accountAddr;
     console.log(data);
     models.Project.findOne({_id:id}, function (err, proj) {
         if(err){
@@ -113,19 +120,36 @@ router.post('/projDetail/:id/fund', filter.authorized_required, multipartMiddlew
                     if(data.fundAmount > user.balance){
                         return res.redirect('/404');
                     }else {
-                        user.balance = Number(user.balance)-Number(data.fundAmount);
-                        proj.raisedAmount += Number(data.fundAmount);
-                        var tx = {
-                            user:{id:user._id,email:user.email},
-                            proj:{id:proj._id,title:proj.title,raisedAmount:proj.raisedAmount},
-                            amount:data.fundAmount
+                        var callback = function (err, txHash) {
+                            if(!err){
+                                do{
+                                    //waiting until get transaction hash
+                                    var txReceipt = web3.eth.getTransactionReceipt(txHash);
+                                    if(!txReceipt){
+                                        console.log("trascation success! the txHash is " + txHash);
+                                    }
+                                }while (!txReceipt);
+
+                                var tx = {
+                                    user:{id:user._id,email:user.email},
+                                    proj:{id:proj._id,title:proj.title,raisedAmount:proj.raisedAmount},
+                                    amount:data.fundAmount,
+                                    txHash:txHash
+                                };
+                                proj.funders.push(tx);
+                                user.fundedProj.push(tx);
+                                proj.save();
+                                user.save();
+                                req.session.user=user;
+
+                                // redirect to project detail page
+                                return res.redirect('/projDetail/'+id);
+                            }
+
                         };
-                        proj.funders.push(tx);
-                        user.fundedProj.push(tx);
-                        proj.save();
-                        user.save();
-                        req.session.user=user;
-                        return res.redirect('/projDetail/'+id);
+                        //return transactionHsh to callback
+                        contractInterface.transfer(accountAdd,proj._id,amount,callback);
+                        // return res.redirect('/projDetail/'+id);
                     }
 
                 }

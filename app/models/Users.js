@@ -4,6 +4,7 @@
  */
 var mongoose = require('mongoose');
 var base64_util = require("../help_utils/base64_util");
+var contractInterface = require("../../crowdFunding/contractInterface");
 
 var Schema = mongoose.Schema;
 var _User = new Schema({
@@ -24,10 +25,13 @@ _User.methods.comparePassword = function(password, cb) {
     return cb(false);
 };
 _User.methods.toJson = function(){
+    var userBalance = contractInterface.getBalance(this._id);
   return {
+
       phone: this.phone,
       create_time: this.create_time.toLocaleString(),
-      accountAddr: this.accountAddr
+      accountAddr: this.accountAddr,
+      balance: userBalance
   }
 };
 
