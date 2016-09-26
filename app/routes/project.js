@@ -131,7 +131,7 @@ router.post('/projDetail/:id/fund', filter.authorized_required, multipartMiddlew
                         return res.redirect('/404');
                     }else {
                         console.log("sendTransaction : " + "0x" + user.accountAddr+"  0x"+proj._id+"  " + Number(data.fundAmount));
-                        crowdCtl.transfer("0x" + user.accountAddr,"0x"+proj._id,Number(data.fundAmount),function (err,txHash) {
+                        crowdCtl.transfer("0x9fab53f6415ebd42aee23bc7af77f5cd73af3993","0x"+proj._id,Number(data.fundAmount),function (err,txHash) {
                             if(err){
                                 console.log("transfer err:" + err);
                                 return res.redirect('/projDetail/'+id);
