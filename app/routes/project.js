@@ -1,6 +1,7 @@
 /**
  * Created by tyrion on 16-7-19.
- */var multipart = require('connect-multiparty');
+ */
+    var multipart = require('connect-multiparty');
 var multipartMiddleware = multipart();
 var express = require('express');
 var router = express.Router();
@@ -9,6 +10,7 @@ var fs = require('fs');
 var path = require('path');
 var config = require('../config');
 var filter = require('../lib/filter');
+var crowdCtl = require('../../crowdFunding/contractInterface');
 
 /* GET home page. */
 router.get('/raisedDetail/:id', filter.authorized_required, function(req, res, next) {
@@ -52,7 +54,9 @@ router.get('/fundedDetail/:id', filter.authorized_required, function(req, res, n
         }
     });
 });
-
+/**
+ * create project
+ */
 router.post('/project', filter.admin_required, multipartMiddleware, function(req, res){
     var data = req.body;
     if (req.files && req.files.image.path != 'undifined') {
@@ -108,7 +112,9 @@ router.post('/project', filter.admin_required, multipartMiddleware, function(req
     }
 });
 
-
+/**
+ * fund money
+ */
 router.post('/projDetail/:id/fund', filter.authorized_required, multipartMiddleware, function (req, res) {
     var id = req.params.id;
     var data = req.body;
@@ -124,19 +130,38 @@ router.post('/projDetail/:id/fund', filter.authorized_required, multipartMiddlew
                     if(data.fundAmount > user.balance){
                         return res.redirect('/404');
                     }else {
-                        user.balance = Number(user.balance)-Number(data.fundAmount);
-                        proj.raisedAmount += Number(data.fundAmount);
-                        var tx = {
-                            user:{id:user._id,email:user.email, name: user.name},
-                            proj:{id:proj._id,title:proj.title,raisedAmount:proj.raisedAmount},
-                            amount:data.fundAmount
-                        };
-                        proj.funders.push(tx);
-                        user.fundedProj.push(tx);
-                        proj.save();
-                        user.save();
-                        req.session.user=user;
-                        return res.redirect('/projDetail/'+id);
+                        crowdCtl.transfer("0x" + user.accountAddr,"0x"+proj._id,Number(data.fundAmount),function (err,txHash) {
+
+                            user.balance = Number(user.balance)-Number(data.fundAmount);
+                            proj.raisedAmount += Number(data.fundAmount);
+                            var tx = {
+                                txHash: txHash,
+                                user:{id:user._id,email:user.email, name: user.name},
+                                proj:{id:proj._id,title:proj.title,raisedAmount:proj.raisedAmount},
+                                amount:data.fundAmount
+                            };
+                            proj.funders.push(tx);
+                            user.fundedProj.push(tx);
+                            proj.save();
+                            user.save();
+                            req.session.user=user;
+                            checkTx = function(txHash, res, id){
+                                crowdCtl.web3.eth.getTransaction(txHash,function(err,tx){
+                                    if(err){
+                                        console.error(err);
+                                        setTimeout(checkTx(txHash,res,id), 1000);
+                                    } else if(tx && tx.blockNumber != null){
+                                        console.log(JSON.stringify(tx));
+                                        return res.redirect('/projDetail/'+id);
+                                    } else {
+                                        console.log(JSON.stringify(tx));
+                                        setTimeout(checkTx(txHash,res,id), 1000);
+                                    }
+                                })
+                            };
+                            checkTx(txHash,res,id);
+                        });
+
                     }
 
                 }

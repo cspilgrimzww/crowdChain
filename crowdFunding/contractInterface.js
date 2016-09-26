@@ -1,12 +1,21 @@
 //请求web3服务
 var Web3 = require('web3');
-var web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
+var web3 = new Web3(new Web3.providers.HttpProvider("http://45.55.234.101:8545"));
 
 var abi = [{"constant":false,"inputs":[{"name":"to","type":"uint256"},{"name":"amount","type":"uint256"}],"name":"transfer","outputs":[],"type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"userBalanceMap","outputs":[{"name":"","type":"uint256"}],"type":"function"},{"constant":false,"inputs":[{"name":"userAddress","type":"address"}],"name":"addUser","outputs":[],"type":"function"},{"constant":true,"inputs":[{"name":"projectHash","type":"uint256"}],"name":"getProjectBalance","outputs":[{"name":"","type":"uint256"}],"type":"function"},{"constant":false,"inputs":[{"name":"account","type":"address"},{"name":"amount","type":"uint256"}],"name":"issue","outputs":[],"type":"function"},{"constant":false,"inputs":[{"name":"projectHash","type":"uint256"}],"name":"createProject","outputs":[],"type":"function"},{"constant":true,"inputs":[{"name":"account","type":"address"}],"name":"getBalance","outputs":[{"name":"","type":"uint256"}],"type":"function"},{"inputs":[],"type":"constructor"},{"anonymous":false,"inputs":[{"indexed":false,"name":"account","type":"address"},{"indexed":false,"name":"amount","type":"uint256"}],"name":"Issue","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"from","type":"address"},{"indexed":false,"name":"to","type":"uint256"},{"indexed":false,"name":"amount","type":"uint256"}],"name":"Transfer","type":"event"}];
 var myContract = web3.eth.contract(abi);
-var contractAddress = '0x58761bbd2bcbf5dfff0700d08ab139fab5e488d7';
+var contractAddress = '0x326556cf84646f05fcae4099bf391cd29b85d1b8';
 // transactionHash: "0xca343ab30a0248b08395c4079463012abad29de852fed41352fc90abed873c7c"
 var crowdFundingSystem = myContract.at(contractAddress);
+var filter = web3.eth.filter("latest");
+
+filter.watch(function (err, result) {
+    if(err){
+        console.log("err : "+err)
+    } else {
+        console.log("result : " + result)
+    }
+});
 
 // //智能合约编译
 // var crowdFundSource = 'contract CrowdFundingSystem {     address issuer;     mapping(uint => uint) projectBalanceMap;     mapping(uint => mapping(address => uint)) projectRecordsMap;     mapping(address => uint) public userBalanceMap;     event Issue(address account, uint amount);     event Transfer(address from,uint to, uint amount);     function CrowdFundingSystem() {         issuer = msg.sender;     }     function issue(address account, uint amount) {         if (msg.sender != issuer) throw;         userBalanceMap[account] += amount;         Issue(account, amount);     }     function transfer(uint to, uint amount) {         if (userBalanceMap[msg.sender] < amount) throw;         userBalanceMap[msg.sender] -= amount;         projectBalanceMap[to] +=amount;         projectRecordsMap[to][msg.sender] += amount;         Transfer(msg.sender, to, amount);     }     function addUser(address userAddress){         userBalanceMap[userAddress] = 10000;     }     function createProject(uint projectHash)     {         projectBalanceMap[projectHash] = 0;     }     function getBalance(address account) constant returns (uint) {         return userBalanceMap[account];     }     function getProjectBalance(uint projectHash) constant returns (uint) {         return projectBalanceMap[projectHash];     } }';
@@ -90,7 +99,7 @@ function getProjectBalance(projectHashID){
 function updateBalance(users){
     var Users = users;
     Users.forEach(function(user){
-        user.balance=crowdFundingSystem.getBalance(user.account);
+        user.balance=crowdFundingSystem.getBalance(user.accountAddr);
     });
     return Users;
 }
@@ -115,6 +124,7 @@ function updateProjectBalance(projects){
  */
 module.exports = {
     // init: init,
+    web3: web3,
     issue: issue,
     //listEntities: listEntities,
     transfer: transfer,

@@ -3,6 +3,7 @@
  */
 
 var mongoose = require('mongoose');
+var crowdCtl = require('../../crowdFunding/contractInterface');
 // var contractInterface = require('../../crowdFunding/contractInterface');
 
 var Schema = mongoose.Schema;
@@ -47,7 +48,7 @@ _Project.methods.toJson = function(){
         deadline: this.deadline,
         targetAmount: this.targetAmount,
         // raisedAmount: balance,
-        raisedAmount: this.raisedAmount,
+        raisedAmount: crowdCtl.getProjectBalance('0x'+this._id),
         image: this.image,
         description: this.description,
         comments: this.comments,
