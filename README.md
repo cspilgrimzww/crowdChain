@@ -2,11 +2,11 @@
 A demo for the project which is the result of cooperation of UCC&amp;ZJU
 
 
-##clone  this repository
+## clone  this repository
 
 `git clone https://github.com/cspilgrimzww/crowdChain.git`
 
-##Install dependences
+## Install dependences
 
 ```
 npm install
@@ -14,9 +14,9 @@ cd app
 npm install
 ```
 
-##Run
+## Run
 
-###mongodb service should be start before run crowdchain(if not installed, see [mongodb doc](https://docs.mongodb.com/manual/installation/))
+### mongodb service should be start before run crowdchain(if not installed, see [mongodb doc](https://docs.mongodb.com/manual/installation/))
 
 >mongod
 
@@ -27,7 +27,7 @@ under `crowdChain/app/`
 visit localhost:3000
 
 
-##Demo account can used to login
+## Demo account can used to login
  + adminadmin1@mail.com
    Admin
    1123456
